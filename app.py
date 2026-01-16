@@ -9,7 +9,7 @@ import platform
 # --- 폰트 설정 시작 ---
 def set_korean_font():
     # 1. GitHub에 함께 올린 나눔고딕 파일 확인
-    font_filename = "NanumGothic.ttf"
+    font_filename = "NanumGothic-Regular.ttf"
     
     if os.path.exists(font_filename):
         # 폰트 파일이 있는 경우 (Streamlit Cloud 환경 대응)
