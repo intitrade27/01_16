@@ -14,6 +14,14 @@ plt.rcParams['axes.unicode_minus'] = False # 마이너스 기호 깨짐 방지
 st.title("📊 국세청 근로소득 데이터 분석기 📊")
 filepath = "국세청_근로소득 백분위(천분위) 자료_20241231.csv"
 
+# 폰트 경로 설정 (Streamlit Cloud 환경 대응)
+@st.cache_resource
+def load_font():
+    # 이 부분은 리눅스 서버에 기본 설치된 폰트를 사용하거나 
+    # 한글 지원을 위해 아래 설정을 추가합니다.
+    plt.rc('font', family='NanumGothic') # 시스템에 나눔고딕이 있다면 사용
+    plt.rcParams['axes.unicode_minus'] = False
+
 try: 
     # 데이터 읽기
     df = pd.read_csv(filepath, encoding='cp949')
@@ -40,9 +48,9 @@ try:
         sns.histplot(df[selected_col], ax=ax, color="#6DD66D", kde=True) # kde=True는 곡선을 그려줌
 
         # 그래프 제목 및 축 설정
-        ax.set_title(f"{selected_col} 분포 확인", fontsize=15)
-        ax.set_xlabel(selected_col)
-        ax.set_ylabel("빈도수")
+        ax.set_title(f"{selected_col} 분포 확인", fontsize=15, fontweight='bold')
+        ax.set_xlabel(selected_col, fontsize=12)
+        ax.set_ylabel("빈도수", fontsize=12)
 
         # 스트림릿 웹 화면에 그래프 표시
         st.pyplot(fig)
